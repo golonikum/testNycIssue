@@ -1,0 +1,20 @@
+{
+  "name": "testNycIssue",
+  "version": "1.0.0",
+  "description": "Test istanbul covarage issue: Unable to lookup source.",
+  "main": "app/source.js",
+  "scripts": {
+    "beforeTest": "nyc instrument ./app ./app-instrumented && ren app app_bak && ren app-instrumented app",
+    "test": "mocha-headless-chrome -f test.html -c .nyc_output/coverage.json",
+    "afterTest": "ren app app-instrumented && ren app_bak app && nyc report --reporter=html",
+    "testWithCoverage": "npm run beforeTest && npm run test && npm run afterTest"
+  },
+  "author": "golonikum",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "4.1.2",
+    "mocha": "2.3.0",
+    "nyc": "11.7.3",
+    "mocha-headless-chrome": "2.0.0"
+  }
+}
